@@ -67,6 +67,7 @@
     </el-form>
   </div>
 </template>
+
 <script>
 import course from '@/api/edu/course'
 import subject from '@/api/edu/subject'
@@ -121,7 +122,7 @@ export default {
             for(var i = 0; i < this.subjectOneList.length; i++) {
                 //  当前一级分类
                 var oneSubject = this.subjectOneList[i]
-                //  判断：当前一级分类id 和 点击的一级分类id是否一样
+                //  判断：当前一级分类id 和 点击的一级分类id 是否一样
                 if(value === oneSubject.id) {
                     //  从当前一级分类中获取它对应的所有二级分类
                     this.subjectTwoList = oneSubject.children
