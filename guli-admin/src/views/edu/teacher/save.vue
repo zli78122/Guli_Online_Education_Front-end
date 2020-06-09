@@ -42,7 +42,7 @@
             :width="200"
             :height="200"
             :key="imagecropperKey"
-            :url="BASE_API + '/eduoss/fileoss'"
+            :url="BASE_API + '/eduoss/fileoss/avatar'"
             field="file"
             @close="close"
             @crop-upload-success="cropSuccess"/>
