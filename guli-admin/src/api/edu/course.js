@@ -45,4 +45,18 @@ export default {
             method: 'post'
         })
     },
+    // 查询所有课程
+    getListCourse() {
+        return request({
+            url: '/eduservice/course/findAll',
+            method: 'get'
+        })
+    },
+    // 删除课程
+    deleteCourseById(id) {
+        return request({
+            url: `/eduservice/course/${id}`,
+            method: 'delete'
+        })
+    }
 }
