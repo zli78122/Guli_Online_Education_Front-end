@@ -74,7 +74,7 @@ export default {
         return {
           list: null,        //查询之后接口返回集合
           page: 1,           //当前页
-          limit: 5,          //每页记录数
+          limit: 10,         //每页记录数
           total: 0,          //总记录数
           courseQuery: {}    //条件封装对象
         }
@@ -83,23 +83,15 @@ export default {
         this.getList()
     },
     methods: {
+        // 分页条件查询课程
         getList(page = 1) {
-            course.getListCourse()
+            this.page = page
+            course.getCourseListPage(this.page, this.limit, this.courseQuery)
                 .then(response => {
-                    this.list = response.data.list
+                    this.list = response.data.rows
+                    this.total = response.data.total
                 })
         },
-        // getList(page = 1) {
-        //     this.page = page
-        //     teacher.getTeacherListPage(this.page, this.limit, this.teacherQuery) //发送Axios请求
-        //         .then(response => {
-        //             this.list = response.data.rows
-        //             this.total = response.data.total
-        //             console.log(this.list)
-        //             console.log(this.total)
-        //         })
-        // },
-        
         // 重置表单数据
         resetData() {
             //  表单输入项数据清空

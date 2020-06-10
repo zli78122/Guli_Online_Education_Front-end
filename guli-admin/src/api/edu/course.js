@@ -58,5 +58,16 @@ export default {
             url: `/eduservice/course/${id}`,
             method: 'delete'
         })
+    },
+    // 分页条件查询课程
+    // current:当前页   limit:每页记录数   courseQuery:条件对象
+    getCourseListPage(current, limit, courseQuery) {
+        return request({
+            url: `/eduservice/course/pageCourseCondition/${current}/${limit}`,
+            method: 'post',
+            //  courseQuery条件对象，后端使用RequestBody获取数据
+            //  data表示把对象转换成json，然后传递到后端接口里面
+            data: courseQuery
+        })
     }
 }
