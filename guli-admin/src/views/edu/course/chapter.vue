@@ -76,12 +76,32 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="上传视频">
-          <!-- TODO -->
+          <el-upload
+            :on-success="handleVodUploadSuccess"
+            :on-remove="handleVodRemove"
+            :before-remove="beforeVodRemove"
+            :on-exceed="handleUploadExceed"
+            :file-list="fileList"
+            :action="BASE_API + '/eduvod/video/uploadVideo'"
+            :limit="1"
+            class="upload-demo">
+            <el-button size="small" type="primary">上传视频</el-button>
+            <el-tooltip placement="right-end">
+              <div slot="content">
+                最大支持1G，<br>
+                支持3GP、ASF、AVI、DAT、DV、FLV、F4V、<br>
+                GIF、M2T、M4V、MJ2、MJPEG、MKV、MOV、MP4、<br>
+                MPE、MPG、MPEG、MTS、OGG、QT、RM、RMVB、<br>
+                SWF、TS、VOB、WMV、WEBM 等视频格式上传
+              </div>
+              <i class="el-icon-question"/>
+            </el-tooltip>
+          </el-upload>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogVideoFormVisible = false">取 消</el-button>
-        <el-button :disabled="saveVideoBtnDisabled" type="primary" @click="saveOrUpdateVideo">确 定</el-button>
+        <el-button type="primary" @click="saveOrUpdateVideo">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -106,11 +126,14 @@ export default {
                 id: '',
                 title: '',
                 videoSourceId: '',
+                videoOriginalName: '',
                 sort: 0,
                 free: 0
             },
             dialogChapterFormVisible: false,   //章节对话框
-            dialogVideoFormVisible: false   //小节对话框
+            dialogVideoFormVisible: false,     //小节对话框
+            fileList: [],                      //上传文件列表
+            BASE_API: process.env.BASE_API     //获取config/dev.env.js里面的请求根路径
         }
     },
     created() {
@@ -129,6 +152,26 @@ export default {
         },
         next() {
             this.$router.push({path:'/course/publish/' + this.courseId})
+        },
+
+        // 视频上传成功的回调
+        handleVodUploadSuccess(response, file, fileList) {
+            // 获取视频id
+            this.video.videoSourceId = response.data.videoId
+            // 获取视频文件的原始名称
+            this.video.videoOriginalName = file.name
+        },
+        // 删除上传视频后的回调
+        handleVodRemove() {
+            
+        },
+        // 删除上传视频前的回调
+        beforeVodRemove() {
+            
+        },
+        // 上传文件个数超过最大限制个数时 触发的回调，此处限制最多上传一个文件
+        handleUploadExceed() {
+            this.$message.warning('想要重新上传视频，请先删除已上传的视频')
         },
 
         // 删除小节
@@ -163,6 +206,7 @@ export default {
             this.video.id = ''
             this.video.title = ''
             this.video.videoSourceId = ''
+            this.video.videoOriginalName = ''
             this.video.sort = 0
             this.video.free = 0
         },
@@ -172,6 +216,8 @@ export default {
             this.video.courseId = this.courseId
             video.addVideo(this.video)
                 .then(response => {
+                    // 关闭对话框前 初始化上传文件列表
+                    this.fileList = []
                     // 关闭对话框
                     this.dialogVideoFormVisible = false
                     // 提示信息
