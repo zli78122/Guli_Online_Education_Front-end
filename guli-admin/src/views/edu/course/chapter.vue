@@ -164,7 +164,7 @@ export default {
         // 删除上传视频 触发的回调
         handleVodRemove() {
             // 根据视频id删除存储在阿里云服务器上的视频文件
-            video.deleteVideo(this.video.videoSourceId)
+            video.deleteAliyunVideo(this.video.videoSourceId)
                 .then(response => {
                     this.$message({
                         type: 'success',
