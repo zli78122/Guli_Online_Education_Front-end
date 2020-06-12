@@ -161,7 +161,7 @@ export default {
             // 获取视频文件的原始名称
             this.video.videoOriginalName = file.name
         },
-        // 删除上传视频后的回调
+        // 删除上传视频 触发的回调
         handleVodRemove() {
             // 根据视频id删除存储在阿里云服务器上的视频文件
             video.deleteVideo(this.video.videoSourceId)
@@ -178,7 +178,7 @@ export default {
                     this.video.videoOriginalName = ''
                 })
         },
-        // 删除上传视频前的回调
+        // 删除上传视频前 触发的回调
         beforeVodRemove(file, fileList) {
             return this.$confirm(`确定移除 ${ file.name } 吗?`);
         },
