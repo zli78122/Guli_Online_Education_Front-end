@@ -24,4 +24,9 @@ service.interceptors.request.use(
   }
 )
 
+// http response 拦截器
+service.interceptors.response.use(
+
+)
+
 export default service

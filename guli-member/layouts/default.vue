@@ -55,7 +55,7 @@
                 >
                 <span id="userName" class="vam disIb">{{ loginInfo.nickname }}</span>
               </a>
-              <a href="javascript:void(0);" title="退出" @click="logout()" class="ml5">退出</a>
+              <a href="javascript: void(0);" title="退出" @click="logout()" class="ml5">退出</a>
             </li>
             <!-- /未登录显示第1 li；登录后显示第2，3 li -->
           </ul>

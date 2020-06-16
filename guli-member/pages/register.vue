@@ -41,7 +41,7 @@
         </el-form-item>
         
         <div class="btn">
-          <input type="button" class="sign-up-button" value="注册" @click="submitRegister()">
+          <input type="button" class="sign-up-button" value="注册" @click="submitRegister()"/>
         </div>
         <p class="sign-up-msg">
           点击 “注册” 即表示您同意并愿意遵守简书
