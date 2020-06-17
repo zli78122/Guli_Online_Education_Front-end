@@ -16,10 +16,15 @@
             <dd class="c-s-dl-li">
               <ul class="clearfix">
                 <li>
-                  <a title="全部" href="#">全部</a>
+                  <a title="全部" href="javascript: void(0);" @click="searchAll()">全部</a>
                 </li>
-                <li v-for="(item, index) in subjectNestedList" :key="index" :class="{active:oneIndex==index}">
-                  <a :title="item.title" href="#" @click="searchOne(item.id, index)">{{item.title}}</a>
+                <!-- 
+                    :class="{active : oneIndex == index}
+                        oneIndex == index   ->   class="active"
+                        oneIndex != index   ->   class=""
+                 -->
+                <li v-for="(item, index) in subjectNestedList" :key="index" :class="{active : oneIndex == index}">
+                  <a :title="item.title" href="javascript: void(0);" @click="searchOne(item.id, index)">{{item.title}}</a>
                 </li>
               </ul>
             </dd>
@@ -30,8 +35,13 @@
             </dt>
             <dd class="c-s-dl-li">
               <ul class="clearfix">
-                <li v-for="(item, index) in subSubjectList" :key="index" :class="{active:twoIndex==index}">
-                  <a :title="item.title" href="#" @click="searchTwo(item.id, index)">{{item.title}}</a>
+                <!-- 
+                    :class="{active : twoIndex == index}
+                        twoIndex == index   ->   class="active"
+                        twoIndex != index   ->   class=""
+                 -->
+                <li v-for="(item, index) in subSubjectList" :key="index" :class="{active : twoIndex == index}">
+                  <a :title="item.title" href="javascript: void(0);" @click="searchTwo(item.id, index)">{{item.title}}</a>
                 </li>
               </ul>
             </dd>
@@ -47,15 +57,19 @@
           </section>
           <section class="fl">
             <ol class="js-tap clearfix">
-              <li>
-                <a title="关注度" href="#">关注度</a>
+              <li :class="{'current bg-orange' : buyCountSort != ''}">
+                <a title="销量" href="javascript: void(0);" @click="searchBuyCount()">销量
+                  <span :class="{hide : buyCountSort == ''}">↓</span>
+                </a>
               </li>
-              <li>
-                <a title="最新" href="#">最新</a>
+              <li :class="{'current bg-orange' : gmtCreateSort != ''}">
+                <a title="最新" href="javascript: void(0);" @click="searchGmtCreate()">最新
+                  <span :class="{hide : gmtCreateSort == ''}">↓</span>
+                </a>
               </li>
-              <li class="current bg-orange">
-                <a title="价格" href="#">价格&nbsp;
-                  <span>↓</span>
+              <li :class="{'current bg-orange' : priceSort != ''}">
+                <a title="价格" href="javascript: void(0);" @click="searchPrice()">价格
+                  <span :class="{hide : priceSort == ''}">↓</span>
                 </a>
               </li>
             </ol>
@@ -73,7 +87,7 @@
               <li v-for="item in data.items" :key="item.id">
                 <div class="cc-l-wrap">
                   <section class="course-img">
-                    <img :src="item.cover" class="img-responsive" :alt="item.title">
+                    <img :src="item.cover" class="img-responsive" :alt="item.title" style="height: 150px; width: 267.5px;"/>
                     <div class="cc-mask">
                       <a :href="'/course/'+item.id" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
                     </div>
@@ -148,18 +162,16 @@ import courseApi from '@/api/course'
 export default {
     data() {
         return {
-            page: 1, //当前页码
-            data: {},  //课程数据
-            subjectNestedList: [], //课程一级分类
-            subSubjectList: [], //课程二级分类
-
-            searchObj: {}, //条件查询对象
-
-            oneIndex: -1,
-            twoIndex: -1,
-            buyCountSort: "",
-            gmtCreateSort: "",
-            priceSort: ""
+            page: 1,                 //当前页码
+            data: {},                //课程数据
+            subjectNestedList: [],   //课程一级分类
+            subSubjectList: [],      //课程二级分类
+            searchObj: {},           //条件查询对象
+            oneIndex: -1,            //控制一级分类CSS样式
+            twoIndex: -1,            //控制二级分类CSS样式
+            buyCountSort: "",        //销量排序，同时控制销量排序CSS样式
+            gmtCreateSort: "",       //最新时间排序，同时控制最新时间排序CSS样式
+            priceSort: ""            //价格排序，同时控制价格排序CSS样式
         }
     },
     created() {
@@ -169,6 +181,115 @@ export default {
         this.initCourseData()
     },
     methods: {
+        searchAll() {
+            // 初始化数据
+            this.subSubjectList = []
+            this.oneIndex = -1
+            this.twoIndex = -1
+            this.buyCountSort = ""
+            this.gmtCreateSort = ""
+            this.priceSort = ""
+
+            // 清空条件查询对象
+            this.searchObj = {}
+
+            // 分页条件查询课程
+            this.gotoPage(1)
+        },
+        searchPrice() {
+            // 初始化数据
+            this.buyCountSort = ""
+            this.gmtCreateSort = ""
+
+            // 设置 价格排序
+            if (this.priceSort === "") {
+                this.priceSort = 1;
+            } else {
+                this.priceSort = "";
+            }
+
+            // 封装查询条件
+            this.searchObj.buyCountSort = this.buyCountSort
+            this.searchObj.gmtCreateSort = this.gmtCreateSort;
+            this.searchObj.priceSort = this.priceSort;
+
+            // 分页条件查询课程
+            this.gotoPage(1)
+        },
+        searchGmtCreate() {
+            // 初始化数据
+            this.buyCountSort = ""
+            this.priceSort = ""
+
+            // 设置 最新时间排序
+            if (this.gmtCreateSort === "") {
+                this.gmtCreateSort = "1"
+            } else {
+                this.gmtCreateSort = ""
+            }
+
+            // 封装查询条件
+            this.searchObj.buyCountSort = this.buyCountSort
+            this.searchObj.gmtCreateSort = this.gmtCreateSort;
+            this.searchObj.priceSort = this.priceSort;
+
+            // 分页条件查询课程
+            this.gotoPage(1)
+        },
+        searchBuyCount() {
+            // 初始化数据
+            this.gmtCreateSort = ""
+            this.priceSort = ""
+
+            // 设置 销量排序
+            if (this.buyCountSort === "") {
+                this.buyCountSort = "1"
+            } else {
+                this.buyCountSort = ""
+            }
+
+            // 封装查询条件
+            this.searchObj.buyCountSort = this.buyCountSort
+            this.searchObj.gmtCreateSort = this.gmtCreateSort;
+            this.searchObj.priceSort = this.priceSort;
+
+            // 分页条件查询课程
+            this.gotoPage(1)
+        },
+        // 点击某个二级分类，分页条件查询课程
+        searchTwo(subjectId,index) {
+            // 控制二级分类CSS样式
+            this.twoIndex = index
+
+            // 封装查询条件 (课程二级分类)
+            this.searchObj.subjectId = subjectId
+            // 分页条件查询课程
+            this.gotoPage(1)
+        },
+        // 点击某个一级分类，查询对应的二级分类
+        searchOne(subjectParentId, index) {
+            // 初始化数据
+            this.subSubjectList = []
+            this.twoIndex = -1
+            this.searchObj.subjectId = ""
+
+            // 控制一级分类CSS样式
+            this.oneIndex = index
+
+            // 封装查询条件 (课程一级分类)
+            this.searchObj.subjectParentId = subjectParentId
+            // 分页条件查询课程
+            this.gotoPage(1)
+
+            // 查询 目标一级分类(subjectParentId) 对应的二级分类
+            for (let i = 0; i < this.subjectNestedList.length; i++) {
+                var oneSubject = this.subjectNestedList[i]
+                if (subjectParentId === oneSubject.id) {
+                    // 获取课程二级分类
+                    this.subSubjectList = oneSubject.children
+                }
+            }
+        },
         // 切换页码
         gotoPage(page) {
             if (page < 1) {
@@ -202,3 +323,21 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+  .active {
+    background: #68cb9b;
+  }
+  .active a {
+    color: #fbfdfd;
+  }
+  .active a:hover {
+    color: #fbfdfd;
+  }
+  .hide {
+    display: none;
+  }
+  .show {
+    display: block;
+  }
+</style>

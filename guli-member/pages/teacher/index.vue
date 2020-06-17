@@ -24,7 +24,7 @@
                 <section class="i-teach-wrap">
                   <div class="i-teach-pic">
                     <a :href="'/teacher/'+teacher.id" :title="teacher.name">
-                      <img :src="teacher.avatar" :alt="teacher.name">
+                      <img :src="teacher.avatar" :alt="teacher.name" style="height: 141.3px; width: 141.3px;"/>
                     </a>
                   </div>
                   <div class="mt10 hLh30 txtOf tac">

@@ -35,6 +35,7 @@
                         :src="course.cover"
                         class="img-responsive"
                         :alt="course.title"
+                        style="height: 150px; width: 267.5px;"
                       >
                       <div class="cc-mask">
                         <a href="#" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
@@ -80,7 +81,7 @@
                   <section class="i-teach-wrap">
                     <div class="i-teach-pic">
                       <a :href="'/teacher/'+teacher.id" :title="teacher.name">
-                        <img :alt="teacher.name" :src="teacher.avatar">
+                        <img :alt="teacher.name" :src="teacher.avatar" style="height: 141.3px; width: 141.3px;"/>
                       </a>
                     </div>
                     <div class="mt10 hLh30 txtOf tac">
