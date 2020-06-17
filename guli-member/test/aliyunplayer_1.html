@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.1/skins/default/aliplayer-min.css"/>
+    <script charset="utf-8" type="text/javascript" src="https://g.alicdn.com/de/prismplayer/2.8.1/aliplayer-min.js"></script>
+</head>
+<body>
+    <div class="prism-player" id="J_prismPlayer"></div>
+    <script>
+        var player = new Aliplayer({
+            // dom id
+            id: 'J_prismPlayer',
+            // 宽度
+            width: '100%',
+            // 高度
+            height: '480px',
+            // 自动播放
+            autoplay: false,
+            // 视频封面
+            cover: 'https://zli78122-guli-edu.oss-us-west-1.aliyuncs.com/images/player%20cover.jpg',
+            // 视频播放地址
+            source: 'https://outin-8f1cba9cab7111ea9b7000163e1c60dc.oss-cn-shanghai.aliyuncs.com/sv/38fce8fc-172a151c8a4/38fce8fc-172a151c8a4.mp4?Expires=1592372896&OSSAccessKeyId=LTAIwkKSLcUfI2u4&Signature=33wygaSkcI7zkqywxxXNL7PCNis%3D'
+        }, function(player) {
+            console.log('播放器创建好了')
+        });
+    </script>
+</body>
+</html>
