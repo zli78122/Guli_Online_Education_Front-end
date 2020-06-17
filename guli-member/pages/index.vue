@@ -44,11 +44,8 @@
                       <a href="#" :title="course.title" class="course-title fsize18 c-333">{{course.title}}</a>
                     </h3>
                     <section class="mt10 hLh20 of">
-                      <span class="fr jgTag bg-green" v-if="Number(course.price) === 0">
+                      <span v-if="Number(course.price) === 0" class="fr jgTag bg-green">
                         <i class="c-fff fsize12 f-fA">免费</i>
-                      </span>
-                      <span class="fr jgTag bg-green" v-if="Number(course.price) !== 0">
-                        <i class="c-fff fsize12 f-fA">￥ {{course.price}}</i>
                       </span>
                       <span class="fl jgAttr c-ccc f-fA">
                         <i class="c-999 f-fA">9634人学习</i>
@@ -82,12 +79,12 @@
                 <li v-for="teacher in teacherList" :key="teacher.id">
                   <section class="i-teach-wrap">
                     <div class="i-teach-pic">
-                      <a href="/teacher/1" :title="teacher.name">
+                      <a :href="'/teacher/'+teacher.id" :title="teacher.name">
                         <img :alt="teacher.name" :src="teacher.avatar">
                       </a>
                     </div>
                     <div class="mt10 hLh30 txtOf tac">
-                      <a href="/teacher/1" :title="teacher.name" class="fsize18 c-666">{{teacher.name}}</a>
+                      <a :href="'/teacher/'+teacher.id" :title="teacher.name" class="fsize18 c-666">{{teacher.name}}</a>
                     </div>
                     <div class="hLh30 txtOf tac">
                       <span class="fsize14 c-999">{{teacher.career}}</span>
