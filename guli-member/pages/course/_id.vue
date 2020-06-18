@@ -39,12 +39,12 @@
               </span>
             </section>
             <section class="c-attr-mt">
-              <a href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+              <a href="#" title="立即购买" @click="createOrders()" class="comm-btn c-btn-3">立即购买</a>
             </section>
           </section>
         </aside>
         <aside class="thr-attr-box">
-          <ol class="thr-attr-ol clearfix">
+          <ol class="thr-attr-ol">
             <li>
               <p>&nbsp;</p>
               <aside>
@@ -164,6 +164,7 @@
 
 <script>
 import courseApi from '@/api/course'
+import ordersApi from '@/api/orders'
 
 export default {
     // asyncData is called every time before loading the page component.
@@ -179,11 +180,23 @@ export default {
                 // 等价于 
                 //   this.courseWebVo = response.data.data.courseWebVo
                 //   this.chapterVideoList = response.data.data.chapterVideoList
+                //   this.courseId = params.id
                 return {
                     courseWebVo: response.data.data.courseWebVo,
-                    chapterVideoList: response.data.data.chapterVideoList
+                    chapterVideoList: response.data.data.chapterVideoList,
+                    courseId: params.id
                 }
             })
+    },
+    methods: {
+        // 生成订单
+        createOrders() {
+            ordersApi.createOrders(this.courseId)
+                .then(response => {
+                    // 生成订单之后，跳转到订单显示页面
+                    this.$router.push({path:'/orders/' + response.data.data.orderId})
+                })
+        }
     }
 }
 </script>

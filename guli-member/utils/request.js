@@ -26,7 +26,39 @@ service.interceptors.request.use(
 
 // http response 拦截器
 service.interceptors.response.use(
+  // response.data.code === 20000 表示 SUCCESS (请求成功)
+  // response.data.code !== 20000 表示 ERROR (请求失败)
 
+  response => {
+    // response.data.code === 28004 表示 用户未登录 (请求失败)
+    if (response.data.code === 28004) {
+      // 跳转到登录页面
+      window.location.href = "/login"
+      return
+    } else {
+      // response.data.code !== 20000 表示 ERROR (请求失败)
+      if (response.data.code !== 20000) {
+        // response.data.code !== 20000 && response.data.code === 25000 表示 订单支付中
+        // response.data.code !== 20000 && response.data.code !== 25000 表示 订单支付失败
+        if (response.data.code !== 25000) {
+          // 订单支付失败
+          Message({
+            message: response.data.message || 'error',
+            type: 'error',
+            duration: 5 * 1000
+          })
+        }
+      } else {
+        // response.data.code === 20000 表示 SUCCESS (请求成功)
+        // 放行 response
+        return response;
+      }
+    }
+  },
+  error => {
+    // 返回错误信息
+    return Promise.reject(error.response)
+  }
 )
 
 export default service
