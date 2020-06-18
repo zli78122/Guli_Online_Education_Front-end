@@ -38,8 +38,11 @@
                 <a class="c-fff vam" title="收藏" href="#" >收藏</a>
               </span>
             </section>
-            <section class="c-attr-mt">
-              <a href="#" title="立即购买" @click="createOrders()" class="comm-btn c-btn-3">立即购买</a>
+            <section v-if="isbuy || Number(courseWebVo.price) === 0" class="c-attr-mt">
+              <a href="javascript: void(0)" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+            </section>
+            <section v-else class="c-attr-mt">
+              <a href="javascript: void(0)" title="立即购买" @click="createOrders()" class="comm-btn c-btn-3">立即购买</a>
             </section>
           </section>
         </aside>
@@ -174,19 +177,19 @@ export default {
     //   params <=> this.$route.params
     //   params.id <=> this.$route.params.id
     asyncData({ params, error }) {
-        // 根据课程id查询课程详情
-        return courseApi.getCourseInfo(params.id)
-            .then(response => {
-                // 等价于 
-                //   this.courseWebVo = response.data.data.courseWebVo
-                //   this.chapterVideoList = response.data.data.chapterVideoList
-                //   this.courseId = params.id
-                return {
-                    courseWebVo: response.data.data.courseWebVo,
-                    chapterVideoList: response.data.data.chapterVideoList,
-                    courseId: params.id
-                }
-            })
+        // 等价于 this.courseId = params.id
+        return { courseId: params.id }
+    },
+    data() {
+        return {
+            courseWebVo: {},
+            chapterVideoList: [],
+            isbuy: false
+        }
+    },
+    created() {
+        // 初始化课程信息
+        this.initCourseInfo()
     },
     methods: {
         // 生成订单
@@ -195,6 +198,16 @@ export default {
                 .then(response => {
                     // 生成订单之后，跳转到订单显示页面
                     this.$router.push({path:'/orders/' + response.data.data.orderId})
+                })
+        },
+        // 初始化课程信息
+        initCourseInfo() {
+            // 根据课程id查询课程详情
+            courseApi.getCourseInfo(this.courseId)
+                .then(response => {
+                    this.courseWebVo = response.data.data.courseWebVo,
+                    this.chapterVideoList = response.data.data.chapterVideoList,
+                    this.isbuy = response.data.data.isBuy
                 })
         }
     }
