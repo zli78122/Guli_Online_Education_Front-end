@@ -77,7 +77,7 @@ export default {
                             type: 'success',
                             message: '支付成功!'
                         })
-                        // 跳转回到课程详情页面
+                        // 跳转到课程详情页面
                         this.$router.push({path: '/course/' + this.payObj.course_id})
                     }
                 })
