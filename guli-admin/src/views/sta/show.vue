@@ -112,7 +112,7 @@ export default {
                 yAxis: {
                     type: 'value'
                 },
-                //系列列表 (每个系列通过 type 决定自己的图表类型)
+                // 系列列表 (每个系列通过 type 决定自己的图表类型)
                 series: [{
                     // 数据
                     data: this.yData,
@@ -121,6 +121,7 @@ export default {
                 }]
             }
 
+            // 使用刚指定的配置项和数据显示图表
             this.chart.setOption(option)
         }
     }
