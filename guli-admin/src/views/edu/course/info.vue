@@ -1,22 +1,22 @@
 <template>
   <div class="app-container">
-    <h2 style="text-align: center;">发布新课程</h2>
+    <h2 style="text-align: center;">Publish New Course</h2>
 
     <el-steps :active="1" process-status="wait" align-center style="margin-bottom: 40px;">
-      <el-step title="填写课程基本信息"/>
-      <el-step title="创建课程大纲"/>
-      <el-step title="最终发布"/>
+      <el-step title="Basic Information"/>
+      <el-step title="Chapter Information"/>
+      <el-step title="Publish"/>
     </el-steps>
 
     <el-form label-width="120px">
       <!-- 课程标题 -->
-      <el-form-item label="课程标题">
-        <el-input v-model="courseInfo.title" placeholder="示例：机器学习项目课：从基础到搭建项目视频课程。专业名称注意大小写"/>
+      <el-form-item label="Title">
+        <el-input v-model="courseInfo.title" placeholder="Example: Machine learning project course: video course from basics to project construction."/>
       </el-form-item>
 
       <!-- 课程分类 -->
-      <el-form-item label="课程分类">
-        <el-select v-model="courseInfo.subjectParentId" placeholder="一级分类" @change="subjectLevelOneChanged">
+      <el-form-item label="Category">
+        <el-select v-model="courseInfo.subjectParentId" placeholder="Primary" @change="subjectLevelOneChanged">
           <el-option
             v-for="subject in subjectOneList"
             :key="subject.id"
@@ -24,7 +24,7 @@
             :value="subject.id"/>
         </el-select>
 
-        <el-select v-model="courseInfo.subjectId" placeholder="二级分类">
+        <el-select v-model="courseInfo.subjectId" placeholder="Secondary">
           <el-option
             v-for="subject in subjectTwoList"
             :key="subject.id"
@@ -34,8 +34,8 @@
       </el-form-item>
 
       <!-- 课程讲师 -->
-      <el-form-item label="课程讲师">
-        <el-select v-model="courseInfo.teacherId" placeholder="请选择">
+      <el-form-item label="Instructor">
+        <el-select v-model="courseInfo.teacherId" placeholder="Please Choose...">
           <el-option
             v-for="teacher in teacherList"
             :key="teacher.id"
@@ -45,23 +45,23 @@
       </el-form-item>
 
       <!-- 总课时 -->
-      <el-form-item label="总课时">
+      <el-form-item label="Lectures">
         <el-input-number :min="0" v-model="courseInfo.lessonNum" controls-position="right" placeholder="请填写课程的总课时数"/>
       </el-form-item>
 
       <!-- 课程价格 -->
-      <el-form-item label="课程价格">
-        <el-input-number :min="0" v-model="courseInfo.price" controls-position="right" placeholder="免费课程请设置为0元"/> 元
+      <el-form-item label="Price">
+        <el-input-number :min="0" v-model="courseInfo.price" controls-position="right" placeholder="免费课程请设置为0元"/>
       </el-form-item>
 
       <!-- 课程简介 -->
-      <el-form-item label="课程简介">
+      <el-form-item label="Introduction">
         <!-- 富文本编辑器Tinymce -->
         <tinymce :height="300" v-model="courseInfo.description"/>
       </el-form-item>
 
       <!-- 课程封面-->
-      <el-form-item label="课程封面">
+      <el-form-item label="Cover">
         <el-upload
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
@@ -73,7 +73,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">下一步</el-button>
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">Next</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -222,7 +222,7 @@ export default {
                 .then(response => {
                     this.$message({
                         type: 'success',
-                        message: '添加课程信息成功!'
+                        message: 'Add Successfully!'
                     });
                     // 跳转到第二步
                     this.$router.push({path:'/course/chapter/' + response.data.courseId})
@@ -234,7 +234,7 @@ export default {
                 .then(response => {
                     this.$message({
                         type: 'success',
-                        message: '修改课程信息成功!'
+                        message: 'Update Successfully!'
                     });
                     // 跳转到第二步
                     this.$router.push({path:'/course/chapter/' + this.courseId})

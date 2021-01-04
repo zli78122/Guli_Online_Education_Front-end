@@ -4,10 +4,10 @@
     <section class="container">
       <header class="comm-title all-teacher-title">
         <h2 class="fl tac">
-          <span class="c-333">全部讲师</span>
+          <span class="c-333">All Instructor</span>
         </h2>
         <section class="c-tab-title">
-          <a id="subjectAll" title="全部" href="#">全部</a>
+          <a id="subjectAll" title="All" href="#">All</a>
         </section>
       </header>
       <section class="c-sort-box unBr">
@@ -15,7 +15,7 @@
           <!-- /无数据提示 开始-->
           <section v-if="data.total==0" class="no-data-wrap">
             <em class="icon30 no-data-ico">&nbsp;</em>
-            <span class="c-666 fsize14 ml10 vam">没有相关数据，小编正在努力整理中...</span>
+            <span class="c-666 fsize14 ml10 vam">no data, instructors will come soon...</span>
           </section>
           <!-- /无数据提示 结束-->
           <article v-if="data.total>0" class="i-teacher-list">
@@ -48,34 +48,34 @@
             <a
               :class="{undisable: !data.hasPrevious}"
               href="#"
-              title="首页"
-              @click.prevent="gotoPage(1)">首</a>
+              title="First"
+              @click.prevent="gotoPage(1)">First</a>
 
             <a
               :class="{undisable: !data.hasPrevious}"
               href="#"
-              title="前一页"
+              title="Prev"
               @click.prevent="gotoPage(data.current - 1)">&lt;</a>
 
             <a
               v-for="page in data.pages"
               :key="page"
               :class="{current: data.current == page, undisable: data.current == page}"
-              :title="'第'+page+'页'"
+              :title="page"
               href="#"
               @click.prevent="gotoPage(page)">{{ page }}</a>
             
             <a
               :class="{undisable: !data.hasNext}"
               href="#"
-              title="后一页"
+              title="Next"
               @click.prevent="gotoPage(data.current + 1)">&gt;</a>
             
             <a
               :class="{undisable: !data.hasNext}"
               href="#"
-              title="末页"
-              @click.prevent="gotoPage(data.pages)">末</a>
+              title="Last"
+              @click.prevent="gotoPage(data.pages)">Last</a>
 
             <div class="clear"></div>
           </div>

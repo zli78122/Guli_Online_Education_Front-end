@@ -4,17 +4,17 @@
       <div class="checkout-tit">
         <h4 class="fl tit-txt">
           <span class="success-icon"></span>
-          <span class="success-info">订单提交成功，请您及时付款！订单号：{{payObj.out_trade_no}}</span>
+          <span class="success-info">The order is submitted successfully, please pay in time! Order No. {{payObj.out_trade_no}}</span>
         </h4>
         <span class="fr">
-          <em class="sui-lead">应付金额：</em>
+          <em class="sui-lead">Pay Amount: </em>
           <em class="orange money">￥{{payObj.total_fee}}</em></span>
         <div class="clearfix"></div>
       </div>
       <div class="checkout-steps">
-        <div class="fl weixin">微信支付</div>
+        <div class="fl weixin">WeChat Pay</div>
         <div class="fl sao">
-          <p class="red">请使用微信扫一扫。</p>
+          <p class="red">Scan the QR code</p>
           <div class="fl code">
             <!-- 二维码 -->  
             <qriously :value="payObj.code_url" :size="338"/>
@@ -75,7 +75,7 @@ export default {
                         // 提示消息
                         this.$message({
                             type: 'success',
-                            message: '支付成功!'
+                            message: 'Successful Payment!'
                         })
                         // 跳转到课程详情页面
                         this.$router.push({path: '/course/' + this.payObj.course_id})

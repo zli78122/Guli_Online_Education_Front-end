@@ -4,46 +4,48 @@
     <header id="header">
       <section class="container">
         <h1 id="logo">
+          <!-- 
           <a href="#" title="谷粒学院">
             <img src="~/assets/img/logo.png" width="100%" alt="谷粒学院">
           </a>
+          -->
         </h1>
         <div class="h-r-nsl">
           <ul class="nav">
             <router-link to="/" tag="li" active-class="current" exact>
-              <a>首页</a>
+              <a>Main</a>
             </router-link>
             <router-link to="/course" tag="li" active-class="current">
-              <a>课程</a>
+              <a>Courses</a>
             </router-link>
             <router-link to="/teacher" tag="li" active-class="current">
-              <a>名师</a>
+              <a>Instructors</a>
             </router-link>
             <router-link to="/article" tag="li" active-class="current">
-              <a>文章</a>
+              <a>Articles</a>
             </router-link>
             <router-link to="/qa" tag="li" active-class="current">
-              <a>问答</a>
+              <a>FAQ</a>
             </router-link>
           </ul>
           <!-- / nav -->
           <ul class="h-r-login">
             <li v-if="!loginInfo.id" id="no-login">
-              <a href="/login" title="登录">
+              <a href="/login" title="Sign in">
                 <em class="icon18 login-icon">&nbsp;</em>
-                <span class="vam ml5">登录</span>
+                <span class="vam ml5">Sign in</span>
               </a>
               |
-              <a href="/register" title="注册">
-                <span class="vam ml5">注册</span>
+              <a href="/register" title="Sign up">
+                <span class="vam ml5">Sign up</span>
               </a>
             </li>
-            <li v-if="loginInfo.id" id="is-login-one" class="mr10">
+            <!-- <li v-if="loginInfo.id" id="is-login-one" class="mr10">
               <a id="headerMsgCountId" href="#" title="消息">
                 <em class="icon18 news-icon">&nbsp;</em>
               </a>
               <q class="red-point" style="display: none">&nbsp;</q>
-            </li>
+            </li> -->
             <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
               <a href="/ucenter" title>
                 <img
@@ -55,14 +57,14 @@
                 >
                 <span id="userName" class="vam disIb">{{ loginInfo.nickname }}</span>
               </a>
-              <a href="javascript: void(0);" title="退出" @click="logout()" class="ml5">退出</a>
+              <a href="javascript: void(0);" title="Sign out" @click="logout()" class="ml5">Sign out</a>
             </li>
             <!-- /未登录显示第1 li；登录后显示第2，3 li -->
           </ul>
           <aside class="h-r-search">
             <form action="#" method="post">
               <label class="h-r-s-box">
-                <input type="text" placeholder="输入你想学的课程" name="queryCourse.courseName" value>
+                <input type="text" placeholder="Input course name" name="queryCourse.courseName" value>
                 <button type="submit" class="s-btn">
                   <em class="icon18">&nbsp;</em>
                 </button>
@@ -85,11 +87,14 @@
       <section class="container">
         <div class>
           <h4 class="hLh30">
-            <span class="fsize18 f-fM c-999">友情链接</span>
+            <span class="fsize18 f-fM c-999">Links</span>
           </h4>
           <ul class="of flink-list">
             <li>
-              <a href="http://www.atguigu.com/" title="尚硅谷" target="_blank">尚硅谷</a>
+              <a href="https://github.com/zli78122" title="Github" target="_blank">Github</a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/zhengyu-li-83b85119b/" title="LinkedIn" target="_blank">LinkedIn</a>
             </li>
           </ul>
           <div class="clear"></div>
@@ -98,15 +103,15 @@
           <section class="fl col-7">
             <section class="mr20">
               <section class="b-f-link">
-                <a href="#" title="关于我们" target="_blank">关于我们</a>|
-                <a href="#" title="联系我们" target="_blank">联系我们</a>|
-                <a href="#" title="帮助中心" target="_blank">帮助中心</a>|
-                <a href="#" title="资源下载" target="_blank">资源下载</a>|
-                <span>服务热线：010-56253825(北京) 0755-85293825(深圳)</span>
-                <span>Email：info@atguigu.com</span>
+                <a href="#" title="About" target="_blank">About</a>|
+                <a href="#" title="Contact" target="_blank">Contact</a>|
+                <a href="#" title="Help" target="_blank">Help</a>|
+                <a href="#" title="Resources" target="_blank">Resources</a>|
+                <span>Cell: +1 (213) 477-5173</span>
+                <span>Email：zli78122@usc.edu</span>
               </section>
               <section class="b-f-link mt10">
-                <span>©2018课程版权均归谷粒学院所有 京ICP备17055252号</span>
+                <span>©2020-2021 Copyright by zli78122</span>
               </section>
             </section>
           </section>

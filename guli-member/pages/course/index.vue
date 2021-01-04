@@ -4,19 +4,19 @@
     <section class="container">
       <header class="comm-title">
         <h2 class="fl tac">
-          <span class="c-333">全部课程</span>
+          <span class="c-333">All Courses</span>
         </h2>
       </header>
       <section class="c-sort-box">
         <section class="c-s-dl">
           <dl>
             <dt>
-              <span class="c-999 fsize14">课程类别</span>
+              <span class="c-999 fsize14">Categories</span>
             </dt>
             <dd class="c-s-dl-li">
               <ul class="clearfix">
                 <li>
-                  <a title="全部" href="javascript: void(0);" @click="searchAll()">全部</a>
+                  <a title="All" href="javascript: void(0);" @click="searchAll()">All</a>
                 </li>
                 <!-- 
                     :class="{active : oneIndex == index}
@@ -58,17 +58,17 @@
           <section class="fl">
             <ol class="js-tap clearfix">
               <li :class="{'current bg-orange' : buyCountSort != ''}">
-                <a title="销量" href="javascript: void(0);" @click="searchBuyCount()">销量
+                <a title="销量" href="javascript: void(0);" @click="searchBuyCount()">Sales
                   <span :class="{hide : buyCountSort == ''}">↓</span>
                 </a>
               </li>
               <li :class="{'current bg-orange' : gmtCreateSort != ''}">
-                <a title="最新" href="javascript: void(0);" @click="searchGmtCreate()">最新
+                <a title="最新" href="javascript: void(0);" @click="searchGmtCreate()">Newest
                   <span :class="{hide : gmtCreateSort == ''}">↓</span>
                 </a>
               </li>
               <li :class="{'current bg-orange' : priceSort != ''}">
-                <a title="价格" href="javascript: void(0);" @click="searchPrice()">价格
+                <a title="价格" href="javascript: void(0);" @click="searchPrice()">Price
                   <span :class="{hide : priceSort == ''}">↓</span>
                 </a>
               </li>
@@ -79,7 +79,7 @@
           <!-- /无数据提示 开始-->
           <section v-if="data.total==0" class="no-data-wrap">
             <em class="icon30 no-data-ico">&nbsp;</em>
-            <span class="c-666 fsize14 ml10 vam">没有相关数据，小编正在努力整理中...</span>
+            <span class="c-666 fsize14 ml10 vam">no data, new courses come soon...</span>
           </section>
           <!-- /无数据提示 结束-->
           <article v-if="data.total>0" class="comm-course-list">
@@ -89,7 +89,7 @@
                   <section class="course-img">
                     <img :src="item.cover" class="img-responsive" :alt="item.title" style="height: 150px; width: 267.5px;"/>
                     <div class="cc-mask">
-                      <a :href="'/course/'+item.id" title="开始学习" class="comm-btn c-btn-1" target="_blank">开始学习</a>
+                      <a :href="'/course/'+item.id" title="Join Now" class="comm-btn c-btn-1" target="_blank">Join Now</a>
                     </div>
                   </section>
                   <h3 class="hLh30 txtOf mt10">
@@ -97,12 +97,12 @@
                   </h3>
                   <section class="mt10 hLh20 of">
                     <span v-if="Number(item.price) === 0" class="fr jgTag bg-green">
-                      <i class="c-fff fsize12 f-fA">免费</i>
+                      <i class="c-fff fsize12 f-fA">Free</i>
                     </span>
                     <span class="fl jgAttr c-ccc f-fA">
-                      <i class="c-999 f-fA">9634人学习</i>
+                      <i class="c-999 f-fA">{{item.viewCount}} viewers</i>
                       |
-                      <i class="c-999 f-fA">9634评论</i>
+                      <i class="c-999 f-fA">9634 Comments</i>
                     </span>
                   </section>
                 </div>
@@ -117,34 +117,34 @@
             <a
               :class="{undisable: !data.hasPrevious}"
               href="#"
-              title="首页"
-              @click.prevent="gotoPage(1)">首</a>
+              title="First"
+              @click.prevent="gotoPage(1)">First</a>
 
             <a
               :class="{undisable: !data.hasPrevious}"
               href="#"
-              title="前一页"
+              title="Prev"
               @click.prevent="gotoPage(data.current - 1)">&lt;</a>
 
             <a
               v-for="page in data.pages"
               :key="page"
               :class="{current: data.current == page, undisable: data.current == page}"
-              :title="'第'+page+'页'"
+              :title="page"
               href="#"
               @click.prevent="gotoPage(page)">{{page}}</a>
 
             <a
               :class="{undisable: !data.hasNext}"
               href="#"
-              title="后一页"
+              title="Next"
               @click.prevent="gotoPage(data.current + 1)">&gt;</a>
 
             <a
               :class="{undisable: !data.hasNext}"
               href="#"
-              title="末页"
-              @click.prevent="gotoPage(data.pages)">末</a>
+              title="Last"
+              @click.prevent="gotoPage(data.pages)">Last</a>
 
             <div class="clear"></div>
           </div>

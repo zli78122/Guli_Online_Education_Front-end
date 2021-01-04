@@ -1,33 +1,33 @@
 <template>
   <div class="app-container">
-    <div style="margin-bottom: 15px">添加讲师</div>
+    <div style="margin-bottom: 15px">Add Instructor</div>
     
     <el-form label-width="120px">
-      <el-form-item label="讲师名称">
+      <el-form-item label="Name">
         <el-input v-model="teacher.name"/>
       </el-form-item>
-      <el-form-item label="讲师排序">
+      <el-form-item label="Sort">
         <el-input-number :min="0" v-model="teacher.sort" controls-position="right"/>
       </el-form-item>
-      <el-form-item label="讲师头衔">
-        <el-select v-model="teacher.level" clearable placeholder="请选择">
-          <el-option :value="1" label="高级讲师"/>
-          <el-option :value="2" label="首席讲师"/>
+      <el-form-item label="Title">
+        <el-select v-model="teacher.level" clearable placeholder="Please Choose...">
+          <el-option :value="1" label="Junior Teacher"/>
+          <el-option :value="2" label="Senior Teacher"/>
         </el-select>
       </el-form-item>
-      <el-form-item label="讲师资历">
+      <el-form-item label="Resume">
         <el-input v-model="teacher.career"/>
       </el-form-item>
-      <el-form-item label="讲师简介">
+      <el-form-item label="Introduction">
         <el-input v-model="teacher.intro" :rows="10" type="textarea"/>
       </el-form-item>
 
       <!-- 讲师头像 -->
-      <el-form-item label="讲师头像">
+      <el-form-item label="Avatar">
         <!-- 头像缩略图 -->
         <pan-thumb :image="teacher.avatar"/>
         <!-- 文件上传按钮 -->
-        <el-button type="primary" icon="el-icon-upload" @click="imagecropperShow=true">更换头像</el-button>
+        <el-button type="primary" icon="el-icon-upload" @click="imagecropperShow=true">Change Avatar</el-button>
 
         <!--
             v-show：是否显示上传组件
@@ -49,7 +49,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">保存</el-button>
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">Save</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -145,7 +145,7 @@ export default {
                     // 提示信息
                     this.$message({
                         type: 'success',
-                        message: '添加成功!'
+                        message: 'Successful Add!'
                     });
                     // 路由跳转，回到列表页面
                     this.$router.push({path:'/teacher/table'})
@@ -158,7 +158,7 @@ export default {
                 // 提示信息
                 this.$message({
                     type: 'success',
-                    message: '修改成功!'
+                    message: 'Successful Update!'
                 });
                 // 路由跳转，回到列表页面
                 this.$router.push({path:'/teacher/table'})

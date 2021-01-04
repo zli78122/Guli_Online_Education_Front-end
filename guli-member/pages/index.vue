@@ -21,7 +21,7 @@
         <section class="container">
           <header class="comm-title">
             <h2 class="tac">
-              <span class="c-333">热门课程</span>
+              <span class="c-333">Popular Courses for Recommendation</span>
             </h2>
           </header>
           <div>
@@ -37,7 +37,7 @@
                         style="height: 150px; width: 267.5px;"
                       >
                       <div class="cc-mask">
-                        <a :href="'/course/'+course.id" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
+                        <a :href="'/course/'+course.id" title="Join Now" class="comm-btn c-btn-1">Join Now</a>
                       </div>
                     </section>
                     <h3 class="hLh30 txtOf mt10">
@@ -45,12 +45,12 @@
                     </h3>
                     <section class="mt10 hLh20 of">
                       <span v-if="Number(course.price) === 0" class="fr jgTag bg-green">
-                        <i class="c-fff fsize12 f-fA">免费</i>
+                        <i class="c-fff fsize12 f-fA">Free</i>
                       </span>
                       <span class="fl jgAttr c-ccc f-fA">
-                        <i class="c-999 f-fA">9634人学习</i>
+                        <i class="c-999 f-fA">{{course.viewCount}} Viewers</i>
                         |
-                        <i class="c-999 f-fA">9634评论</i>
+                        <i class="c-999 f-fA">9634 Comments</i>
                       </span>
                     </section>
                   </div>
@@ -59,7 +59,7 @@
               <div class="clear"></div>
             </article>
             <section class="tac pt20">
-              <a href="#" title="全部课程" class="comm-btn c-btn-2">全部课程</a>
+              <a href="#" title="All Courses" class="comm-btn c-btn-2">All Courses</a>
             </section>
           </div>
         </section>
@@ -70,7 +70,7 @@
         <section class="container">
           <header class="comm-title">
             <h2 class="tac">
-              <span class="c-333">名师大咖</span>
+              <span class="c-333">Popular Instructors</span>
             </h2>
           </header>
           <div>
@@ -98,7 +98,7 @@
               <div class="clear"></div>
             </article>
             <section class="tac pt20">
-              <a href="#" title="全部讲师" class="comm-btn c-btn-2">全部讲师</a>
+              <a href="#" title="All Instructors" class="comm-btn c-btn-2">All Instructors</a>
             </section>
           </div>
         </section>

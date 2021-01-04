@@ -1,14 +1,14 @@
 <template>
   <div class="app-container">
-    <h2 style="text-align: center;">发布新课程</h2>
+    <h2 style="text-align: center;">Publish New Course</h2>
 
     <el-steps :active="2" process-status="wait" align-center style="margin-bottom: 40px;">
-      <el-step title="填写课程基本信息"/>
-      <el-step title="创建课程大纲"/>
-      <el-step title="最终发布"/>
+      <el-step title="Basic Information"/>
+      <el-step title="Chapter Information"/>
+      <el-step title="Publish"/>
     </el-steps>
 
-    <el-button type="text" @click="openChapterDialog()">添加章节</el-button>
+    <el-button type="text" @click="openChapterDialog()">Add Chapter</el-button>
 
     <!-- 课程章节 -->
     <ul class="chanpterList">
@@ -17,9 +17,9 @@
           {{ chapter.title }}
 
           <span class="acts">
-            <el-button type="text" @click="openVideo(chapter.id)">添加小节</el-button>
-            <el-button type="text" @click="openEditChatper(chapter.id)">编辑</el-button>
-            <el-button type="text" @click="removeChapter(chapter.id)">删除</el-button>
+            <el-button type="text" @click="openVideo(chapter.id)">Add Subsection</el-button>
+            <el-button type="text" @click="openEditChatper(chapter.id)">Edit</el-button>
+            <el-button type="text" @click="removeChapter(chapter.id)">Delete</el-button>
           </span>
         </p>
 
@@ -30,8 +30,8 @@
               {{ video.title }}
 
               <span class="acts">
-                <el-button type="text">编辑</el-button>
-                <el-button type="text" @click="removeVideo(video.id)">删除</el-button>
+                <el-button type="text">Edit</el-button>
+                <el-button type="text" @click="removeVideo(video.id)">Delete</el-button>
               </span>
             </p>
           </li>
@@ -40,42 +40,42 @@
     </ul>
 
     <div>
-      <el-button @click="previous">上一步</el-button>
-      <el-button :disabled="saveBtnDisabled" type="primary" @click="next">下一步</el-button>
+      <el-button @click="previous">Prev</el-button>
+      <el-button :disabled="saveBtnDisabled" type="primary" @click="next">Next</el-button>
     </div>
 
     <!-- 章节对话框 -->
-    <el-dialog :visible.sync="dialogChapterFormVisible" title="添加/修改 章节">
+    <el-dialog :visible.sync="dialogChapterFormVisible" title="Add/Edit Chapter">
       <el-form :model="chapter" label-width="120px">
-        <el-form-item label="章节标题">
+        <el-form-item label="Title">
           <el-input v-model="chapter.title"/>
         </el-form-item>
-        <el-form-item label="章节排序">
+        <el-form-item label="Sort">
           <el-input-number :min="0" v-model="chapter.sort" controls-position="right"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogChapterFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="saveOrUpdate">确 定</el-button>
+        <el-button @click="dialogChapterFormVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="saveOrUpdate">Confirm</el-button>
       </div>
     </el-dialog>
 
     <!-- 小节对话框 -->
-    <el-dialog :visible.sync="dialogVideoFormVisible" title="添加课时">
+    <el-dialog :visible.sync="dialogVideoFormVisible" title="Add Subsection">
       <el-form :model="video" label-width="120px">
-        <el-form-item label="课时标题">
+        <el-form-item label="Title">
           <el-input v-model="video.title"/>
         </el-form-item>
-        <el-form-item label="课时排序">
+        <el-form-item label="Sort">
           <el-input-number :min="0" v-model="video.sort" controls-position="right"/>
         </el-form-item>
-        <el-form-item label="是否免费">
+        <el-form-item label="Free">
           <el-radio-group v-model="video.free">
-            <el-radio :label="true">免费</el-radio>
-            <el-radio :label="false">默认</el-radio>
+            <el-radio :label="true">Yes</el-radio>
+            <el-radio :label="false">No</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="上传视频">
+        <el-form-item label="Upload Video">
           <el-upload
             :on-success="handleVodUploadSuccess"
             :on-remove="handleVodRemove"
@@ -85,14 +85,14 @@
             :action="BASE_API + '/eduvod/video/uploadVideo'"
             :limit="1"
             class="upload-demo">
-            <el-button size="small" type="primary">上传视频</el-button>
+            <el-button size="small" type="primary">Upload Video</el-button>
             <el-tooltip placement="right-end">
               <div slot="content">
-                最大支持1G，<br>
-                支持3GP、ASF、AVI、DAT、DV、FLV、F4V、<br>
-                GIF、M2T、M4V、MJ2、MJPEG、MKV、MOV、MP4、<br>
-                MPE、MPG、MPEG、MTS、OGG、QT、RM、RMVB、<br>
-                SWF、TS、VOB、WMV、WEBM 等视频格式上传
+                Max Size: 1G，<br>
+                Support 3GP, ASF, AVI, DAT, DV, FLV, F4V, <br>
+                GIF, M2T, M4V, MJ2, MJPEG, MKV, MOV, MP4, <br>
+                MPE, MPG, MPEG, MTS, OGG, QT, RM, RMVB, <br>
+                SWF, TS, VOB, WMV, WEBM
               </div>
               <i class="el-icon-question"/>
             </el-tooltip>
@@ -100,8 +100,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogVideoFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="saveOrUpdateVideo">确 定</el-button>
+        <el-button @click="dialogVideoFormVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="saveOrUpdateVideo">Confirm</el-button>
       </div>
     </el-dialog>
   </div>
@@ -168,7 +168,7 @@ export default {
                 .then(response => {
                     this.$message({
                         type: 'success',
-                        message: '删除视频成功!'
+                        message: 'Delete Successfully!'
                     });
                     // 清空上传文件列表
                     this.fileList = []
@@ -180,7 +180,7 @@ export default {
         },
         // 删除上传视频前 触发的回调
         beforeVodRemove(file, fileList) {
-            return this.$confirm(`确定移除 ${ file.name } 吗?`);
+            return this.$confirm(`confirm remove ${ file.name }?`);
         },
         // 上传文件个数超过最大限制个数时 触发的回调，此处限制最多上传一个文件
         handleUploadExceed() {
@@ -189,9 +189,9 @@ export default {
 
         // 删除小节
         removeVideo(videoId) {
-            this.$confirm('此操作将永久删除小节记录, 是否继续?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
+            this.$confirm('Confirm delete, Continue...', 'Warning', {
+                confirmButtonText: 'Confirm',
+                cancelButtonText: 'Cancel',
                 type: 'warning'
             }).then(() => { //点击确定，执行then方法
                 // 调用删除的方法
@@ -200,7 +200,7 @@ export default {
                     // 提示信息
                     this.$message({
                         type: 'success',
-                        message: '删除成功!'
+                        message: 'Delete Successfully!'
                     });
                     // 刷新页面
                     this.getChapterVideo()
@@ -236,7 +236,7 @@ export default {
                     // 提示信息
                     this.$message({
                         type: 'success',
-                        message: '添加小节成功!'
+                        message: 'Add Successfully!'
                     });
                     // 刷新页面
                     this.getChapterVideo()
@@ -248,9 +248,9 @@ export default {
 
         // 删除章节
         removeChapter(chapterId) {
-            this.$confirm('此操作将永久删除章节记录, 是否继续?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
+            this.$confirm('Confirm delete, Continue...', 'Warning', {
+                confirmButtonText: 'Confirm',
+                cancelButtonText: 'Cancel',
                 type: 'warning'
             }).then(() => { //点击确定，执行then方法
                 // 调用删除的方法
@@ -259,7 +259,7 @@ export default {
                     // 提示信息
                     this.$message({
                         type: 'success',
-                        message: '删除成功!'
+                        message: 'Delete Successfully!'
                     });
                     // 刷新页面
                     this.getChapterVideo()
@@ -297,7 +297,7 @@ export default {
                     //  提示信息
                     this.$message({
                         type: 'success',
-                        message: '修改章节成功!'
+                        message: 'Update Successfully!!'
                     });
                     //  刷新页面
                     this.getChapterVideo()
@@ -314,7 +314,7 @@ export default {
                     //  提示信息
                     this.$message({
                         type: 'success',
-                        message: '添加章节成功!'
+                        message: 'Add Successfully!'
                     });
                     //  刷新页面
                     this.getChapterVideo()

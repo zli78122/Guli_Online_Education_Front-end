@@ -48,7 +48,7 @@ export default {
             // 宽度
             width: '100%',
             // 高度
-            height: '480px',
+            height: '640px',
             // 视频封面
             cover: 'https://zli78122-guli-edu.oss-us-west-1.aliyuncs.com/images/player%20cover.jpg',
             // 清晰度排序

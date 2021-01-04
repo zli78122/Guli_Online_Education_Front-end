@@ -3,7 +3,7 @@
     <!-- /课程详情 开始 -->
     <section class="container">
       <section class="path-wrap txtOf hLh30">
-        <a href="#" title class="c-999 fsize14">首页</a>
+        <a href="#" title class="c-999 fsize14">Main</a>
         \
         <a href="#" title class="c-999 fsize14">{{courseWebVo.subjectLevelOne}}</a>
         \
@@ -26,23 +26,23 @@
               <span class="c-fff fsize24">{{courseWebVo.title}}</span>
             </h2>
             <section class="c-attr-jg">
-              <span class="c-fff">价格：</span>
-              <b class="c-yellow" style="font-size:24px;">￥{{courseWebVo.price}}</b>
+              <span class="c-fff">Price: </span>
+              <b class="c-yellow" style="font-size:24px;">$ {{courseWebVo.price}}</b>
             </section>
             <section class="c-attr-mt c-attr-undis">
-              <span class="c-fff fsize14">主讲：{{courseWebVo.teacherName}}</span>
+              <span class="c-fff fsize14">Instructor: {{courseWebVo.teacherName}}</span>
             </section>
             <section class="c-attr-mt of">
               <span class="ml10 vam">
                 <em class="icon18 scIcon"></em>
-                <a class="c-fff vam" title="收藏" href="#" >收藏</a>
+                <a class="c-fff vam" title="Like" href="#" >Like</a>
               </span>
             </section>
             <section v-if="isbuy || Number(courseWebVo.price) === 0" class="c-attr-mt">
-              <a href="javascript: void(0)" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+              <a href="javascript: void(0)" title="Watch Now" class="comm-btn c-btn-3">Watch Now</a>
             </section>
             <section v-else class="c-attr-mt">
-              <a href="javascript: void(0)" title="立即购买" @click="createOrders()" class="comm-btn c-btn-3">立即购买</a>
+              <a href="javascript: void(0)" title="Buy Now" @click="createOrders()" class="comm-btn c-btn-3">Buy Now</a>
             </section>
           </section>
         </aside>
@@ -51,7 +51,7 @@
             <li>
               <p>&nbsp;</p>
               <aside>
-                <span class="c-fff f-fM">购买数</span>
+                <span class="c-fff f-fM">Buy Count</span>
                 <br>
                 <h6 class="c-fff f-fM mt10">{{courseWebVo.buyCount}}</h6>
               </aside>
@@ -59,7 +59,7 @@
             <li>
               <p>&nbsp;</p>
               <aside>
-                <span class="c-fff f-fM">课时数</span>
+                <span class="c-fff f-fM">Lectures</span>
                 <br>
                 <h6 class="c-fff f-fM mt10">{{courseWebVo.lessonNum}}</h6>
               </aside>
@@ -67,7 +67,7 @@
             <li>
               <p>&nbsp;</p>
               <aside>
-                <span class="c-fff f-fM">浏览数</span>
+                <span class="c-fff f-fM">Viewers</span>
                 <br>
                 <h6 class="c-fff f-fM mt10">{{courseWebVo.viewCount}}</h6>
               </aside>
@@ -83,13 +83,13 @@
             <div class="i-box">
               <div>
                 <section id="c-i-tabTitle" class="c-infor-tabTitle c-tab-title">
-                  <a name="c-i" class="current" title="课程详情">课程详情</a>
+                  <a name="c-i" class="current" title="Details">Details</a>
                 </section>
               </div>
               <article class="ml10 mr10 pt20">
                 <div>
                   <h6 class="c-i-content c-infor-title">
-                    <span>课程介绍</span>
+                    <span>Introduction</span>
                   </h6>
                   <div class="course-txt-body-wrap">
                     <section class="course-txt-body">
@@ -100,7 +100,7 @@
                 <!-- /课程介绍 -->
                 <div class="mt50">
                   <h6 class="c-g-content c-infor-title">
-                    <span>课程大纲</span>
+                    <span>Outline</span>
                   </h6>
                   <section class="mt20">
                     <div class="lh-menu-wrap">
@@ -115,7 +115,7 @@
                               <li v-for="video in chapter.children" :key="video.id" class="lh-menu-second ml30">
                                 <a :href="'/player/'+video.videoSourceId" target="_blank">
                                   <span class="fr">
-                                    <i class="free-icon vam mr10">免费试听</i>
+                                    <i class="free-icon vam mr10">Free Trial</i>
                                   </span>
                                   <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em>{{video.title}}
                                 </a>
@@ -136,7 +136,7 @@
           <div class="i-box">
             <div>
               <section class="c-infor-tabTitle c-tab-title">
-                <a title href="javascript: void(0)">主讲讲师</a>
+                <a title href="javascript: void(0)">Instructor</a>
               </section>
               <section class="stud-act-list">
                 <ul style="height: auto;">

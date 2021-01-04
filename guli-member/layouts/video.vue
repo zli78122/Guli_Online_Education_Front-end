@@ -1,9 +1,11 @@
 <template>
   <div class="guli-player">
     <div class="head">
+      <!--
       <a href="#" title="谷粒学院">
         <img class="logo" src="~/assets/img/logo.png" lt="谷粒学院">
       </a>
+      -->
     </div>
     <div class="body">
       <div class="content">
@@ -41,7 +43,7 @@ html, body {
 }
 .body {
   position: absolute;
-  top: 50px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;

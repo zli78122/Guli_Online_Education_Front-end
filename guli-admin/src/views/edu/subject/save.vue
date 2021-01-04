@@ -1,15 +1,15 @@
 <template>
   <div class="app-container">
     <el-form label-width="120px">
-      <el-form-item label="信息描述">
-        <el-tag type="info">excel模版说明</el-tag>
+      <el-form-item label="Action">
+        <el-tag type="info">excel template instruction</el-tag>
         <el-tag>
           <i class="el-icon-download"/>
-          <a :href="'/static/template.xlsx'">点击下载模版</a>
+          <a :href="'/static/template.xlsx'">Download Template</a>
         </el-tag>
       </el-form-item>
 
-      <el-form-item label="选择Excel">
+      <el-form-item label="Choose Excel">
         <el-upload
           ref="upload"
           :auto-upload="false"
@@ -20,13 +20,13 @@
           :action="BASE_API + '/eduservice/subject/addSubject'"
           name="file"
           accept="application/vnd.ms-excel">
-          <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+          <el-button slot="trigger" size="small" type="primary">Choose File...</el-button>
           <el-button
             :loading="loading"
             style="margin-left: 10px;"
             size="small"
             type="success"
-            @click="submitUpload">上传到服务器</el-button>
+            @click="submitUpload">Upload to...</el-button>
         </el-upload>
       </el-form-item>
     </el-form>
@@ -58,7 +58,7 @@ export default {
             this.loading = false
             this.$message({
                 type: 'success',
-                message: '添加课程分类成功'
+                message: 'Add Categories Successfully'
             })
             // 路由跳转：跳转到课程分类列表
             this.$router.push({path:'/subject/list'})
@@ -68,7 +68,7 @@ export default {
             this.loading = false
             this.$message({
                 type: 'error',
-                message: '添加课程分类失败'
+                message: 'Fail to add Categories'
             })
         }
     }

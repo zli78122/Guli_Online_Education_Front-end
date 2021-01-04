@@ -1,7 +1,7 @@
 <template>
   <div class="Page Confirm">
     <div class="Title">
-      <h1 class="fl f18">订单确认</h1>
+      <h1 class="fl f18">Order Confirmation</h1>
       <img src="~/assets/img/cart_setp2.png" class="fr">
       <div class="clear"></div>
     </div>
@@ -9,14 +9,14 @@
       <table class="GoodList">
         <tbody>
         <tr>
-          <th class="name">商品</th>
-          <th class="price">原价</th>
-          <th class="priceNew">价格</th>
+          <th class="name">Course</th>
+          <th class="price">Price</th>
+          <th class="priceNew">Pay</th>
         </tr>
         </tbody>
         <tbody>
         <tr>
-          <td colspan="3" class="teacher">讲师：{{order.teacherName}}</td>
+          <td colspan="3" class="teacher">Instructor: {{order.teacherName}}</td>
         </tr>
         <tr class="good">
           <td class="name First">
@@ -35,8 +35,8 @@
         <tr>
           <td class="Billing tr" colspan="3">
             <div class="tr">
-              <p>共 <strong class="red">1</strong> 件商品，合计<span
-                class="red f20">￥<strong>{{order.totalFee}}</strong></span></p>
+              <p>Count: <strong class="red">1</strong>, Total Price: <span
+                class="red f20">$ <strong>{{order.totalFee}}</strong></span></p>
             </div>
           </td>
         </tr>
@@ -44,20 +44,20 @@
       </table>
       <div class="Finish">
         <div class="fr" id="AgreeDiv">
-          <label for="Agree"><p class="on"><input type="checkbox" checked="checked">我已阅读并同意<a href="javascript:" target="_blank">《谷粒学院购买协议》</a></p></label>
+          <label for="Agree"><p class="on"><input type="checkbox" checked="checked">Read and agree<a href="javascript:" target="_blank">《Course Purchase Agreement》</a></p></label>
         </div>
         <div class="clear"></div>
         <div class="Main fl">
           <div class="fl">
-            <a :href="'/course/'+order.courseId">返回课程详情页</a>
+            <a :href="'/course/'+order.courseId">Back to the course page</a>
           </div>
           <div class="fr">
-            <p>共 <strong class="red">1</strong> 件商品，合计<span class="red f20">￥<strong
+            <p>Count: <strong class="red">1</strong>, Total Price<span class="red f20">$ <strong
               id="AllPrice">{{order.totalFee}}</strong></span></p>
           </div>
         </div>
         <input name="score" value="0" type="hidden" id="usedScore">
-        <button class="fr redb" type="button" id="submitPay" @click="toPay()">去支付</button>
+        <button class="fr redb" type="button" id="submitPay" @click="toPay()">Pay</button>
         <div class="clear"></div>
       </div>
     </form>
